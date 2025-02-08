@@ -72,3 +72,35 @@ Key benefits of Promise chaining:
 - Single error handler (`catch`) for the entire chain
 - Avoids "callback hell"
 - Each `.then()` creates a new promise automatically
+
+## Handling Multiple Promises with Promise.all
+
+Sometimes you need to run multiple promises simultaneously and wait for all of them to complete. `Promise.all` takes an array of promises and returns a new promise that resolves when all input promises have resolved.
+
+### Example: Fetching Multiple Dog Images
+
+```javascript
+const promise1 = superagent.get(`https://dog.ceo/api/breed/${breed}/images/random`);
+const promise2 = superagent.get(`https://dog.ceo/api/breed/${breed}/images/random`);
+const promise3 = superagent.get(`https://dog.ceo/api/breed/${breed}/images/random`);
+
+Promise.all([promise1, promise2, promise3])
+    .then(responses => {
+        const images = responses.map(res => res.body.message);
+        return writeFilePromise('dog-images.txt', images.join('\n'));
+    })
+    .then(() => {
+        console.log('All images saved!');
+    })
+    .catch(err => {
+        console.log('Error:', err);
+    });
+```
+
+Key features of Promise.all:
+
+- Runs promises in parallel (simultaneously)
+- Faster than sequential execution
+- If any promise fails, the entire operation fails
+- Returns an array of results in the same order as the input promises
+- Commonly used for bulk operations
