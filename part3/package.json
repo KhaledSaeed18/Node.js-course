@@ -1,0 +1,16 @@
+{
+  "name": "part3",
+  "version": "1.0.0",
+  "description": "🔄️ Node.js is fundamentally built around asynchronous code execution. While traditionally this was handled using callback functions, modern JavaScript provides more elegant and maintainable solutions: **Promises and Async/Await.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "superagent": "^10.1.1"
+  }
+}
