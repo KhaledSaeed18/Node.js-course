@@ -1,4 +1,4 @@
-// TODO: 
+// TODO: Refactor the code to use promises instead of callbacks, and use chaining to handle the promises
 
 // Import the required modules
 const fs = require('fs');
