@@ -31,3 +31,44 @@ const myPromise = new Promise((resolve, reject) => {
 ```
 
 This state management is what makes Promises powerful for handling asynchronous operations in a predictable way.
+
+## Promise Chaining
+
+Promise chaining is a powerful feature that allows you to execute a sequence of asynchronous operations in a specific order. Each `.then()` returns a new promise, enabling you to chain multiple operations.
+
+### Example: Reading, Fetching, and Writing Files
+
+Here's a practical example that demonstrates promise chaining:
+
+1. Read a dog breed from a file
+2. Fetch a random dog image of that breed
+3. Save the image URL to another file
+
+```javascript
+readFilePromise(`${__dirname}/dog.txt`)
+    .then(data => {
+        console.log(`Breed: ${data}`);
+        // First operation complete, return a new promise
+        return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    })
+    .then(res => {
+        console.log(res.body.message);
+        // Second operation complete, return a new promise
+        return writeFilePromise(`${__dirname}/dog-image.txt`, res.body.message);
+    })
+    .then(() => {
+        console.log('Image saved to file!');
+    })
+    .catch(err => {
+        // Handle any errors in the chain
+        console.log(err);
+    });
+```
+
+Key benefits of Promise chaining:
+
+- Clean and readable code flow
+- Each step depends on the previous step's result
+- Single error handler (`catch`) for the entire chain
+- Avoids "callback hell"
+- Each `.then()` creates a new promise automatically
