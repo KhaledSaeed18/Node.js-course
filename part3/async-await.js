@@ -54,7 +54,5 @@ const getDogPic = async () => {
     }
 };
 
-
-
 // Calling the function to get the image of the dog
 getDogPic();
