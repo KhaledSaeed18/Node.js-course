@@ -51,8 +51,49 @@ const getDogPic = async () => {
         console.log('Image saved to file!');
     } catch (err) {
         console.log(err);
+        throw err;
     }
+    return 'READY 🐶';
 };
 
 // Calling the function to get the image of the dog
-getDogPic();
+const getDogPicData = getDogPic();
+console.log(getDogPicData); // Promise { <pending> }
+// The function returns a promise because it is an async function
+// The promise is pending because the function is still executing
+// The promise will be resolved when the function execution is completed
+
+// In order to handle the promise returned by the async function, we can use the then() method
+getDogPicData
+    .then(result => {
+        console.log(result); // READY 🐶
+        console.log('Task completed!');
+    })
+    // The then() method is used to handle the resolved value of the promise
+    // The result is the resolved value returned by the async function
+    // The then() method is called when the promise is resolved
+    .catch(err => {
+        console.log('Error!');
+    });
+// The catch() method is used to handle the rejected value of the promise
+// The err is the rejected value thrown by the async function
+// The catch() method is called when the promise is rejected
+
+// Other way to implement the async/await function
+(async () => {
+    try {
+        const result = await getDogPic();
+        console.log(result);
+        console.log('Task completed!');
+    } catch (err) {
+        console.log('Error!');
+    }
+})();
+
+/*
+This syntax is used to create an immediately invoked async function expression (IIFE).
+called: Immediately Invoked Function Expression (IIFE)
+(async () => {
+    ....
+})();
+*/
